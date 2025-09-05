@@ -9,23 +9,46 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+  #shareChallengeBtn:hover {
+    color: #003366 !important;
+  }
+  .get-updates-btn:hover {
+    color: #003366 !important;
+  }
+  .see-ways-btn:hover {
+    color: #003366 !important;
+  }
+    .campus-explainer {
+  background: #eff0e0;
+  margin-top: 0;
+  padding: 48px 32px;
+    }
+    .coffee-explainer {
+  background: #d9e8f6;
+  margin-top: 0;
+  padding: 48px 32px;
+    }
     :root {
-      /* Color palette inspired by your brief */
-      --yellow: #FFD400;               /* hope, optimism, urgency */
-      --navy: #0A2540;                 /* trust, stability */
-      --blue: #1F7AE0;                 /* action */
-      --rust: #C45A2E;                 /* energy */
-      --orange: #F56A00;               /* motivation */
-      --neutral-100: #F7F7F8;          /* soft neutral */
-      --neutral-200: #ECEDEF;          /* soft neutral */
-      --neutral-700: #3C3F44;          /* body text */
-      --neutral-900: #14161A;          /* headings */
-      --focus: #1F7AE0;                /* accessible focus */
-      --radius-xl: 1.25rem;
-      --radius-lg: 0.75rem;
-      --shadow-md: 0 10px 30px rgba(10, 37, 64, 0.15);
-      --shadow-sm: 0 4px 12px rgba(10, 37, 64, 0.12);
-      --maxw: 1200px;
+  /* Brand color palette (Pantone) */
+  --yellow: #FFC907;               /* Pantone 108 U */
+  --navy: #003366;                 /* Pantone — */
+  --blue: #77A8BB;                 /* Pantone — */
+  --light-yellow: #FFFFE1;         /* Pantone — */
+  --black: #1A1A1A;                /* Pantone Black 6 U */
+  --tan: #F8F4E2;                  /* Pantone (50% Tint) */
+  --peach: #FEDBC1;                /* Pantone — */
+  --rust: #BF6C46;                 /* Pantone — */
+  --gray: #CBCCD1;                 /* Pantone — */
+  --neutral-100: #FFFFE1;          /* off-white */
+  --neutral-200: #CBCCD1;          /* light gray */
+  --neutral-700: #1A1A1A;          /* body text */
+  --neutral-900: #003366;          /* headings/navy */
+  --focus: #77A8BB;                /* accessible focus (blue) */
+  --radius-xl: 1.25rem;
+  --radius-lg: 0.75rem;
+  --shadow-md: 0 10px 30px rgba(0, 51, 102, 0.15);
+  --shadow-sm: 0 4px 12px rgba(0, 51, 102, 0.12);
+  --maxw: 1200px;
     }
 
     * { box-sizing: border-box; }
@@ -61,10 +84,10 @@
     .btn:active { transform: translateY(1px); }
 
     .btn-primary { background: var(--yellow); color: var(--neutral-900); }
-    .btn-primary:hover { box-shadow: var(--shadow-sm); }
+  .btn-primary:hover { box-shadow: var(--shadow-sm); background: #003366 !important; color: #fff !important; }
 
     .btn-outline { background: white; color: var(--neutral-900); border-color: var(--neutral-200); }
-    .btn-outline:hover { box-shadow: var(--shadow-sm); }
+  .btn-outline:hover { box-shadow: var(--shadow-sm); background: var(--blue); color: #fff; border-color: var(--blue); }
 
     /* Hero */
     .hero {
@@ -87,9 +110,11 @@
 
     /* Impact band */
     .impact {
-      background: var(--navy);
-      color: white;
-      padding: 28px 0;
+  background: linear-gradient(90deg, var(--navy) 60%, var(--blue) 100%);
+  color: white;
+  padding: 28px 0;
+  border-top: 4px solid var(--yellow);
+  border-bottom: 4px solid var(--rust);
     }
     .impact-grid { display:grid; grid-template-columns: repeat(3,1fr); gap: 18px; text-align:center; }
   .impact h3 { margin:0; font-size: 24px; }
@@ -108,12 +133,42 @@
     }
 
     /* Sections */
-    section { padding: 64px 0; }
+    section { padding: 0 0 64px 0; }
     .section-title { font-size: 32px; color: var(--neutral-900); margin: 0 0 10px 0; }
     .section-sub { margin: 0 0 24px 0; color: var(--neutral-700); }
 
     .cards { display:grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  .card { background: white; border: 1px solid var(--neutral-200); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-sm); display:flex; flex-direction:column; transition: transform 0.15s cubic-bezier(.4,1.4,.7,1); }
+  .card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.15s cubic-bezier(.4,1.4,.7,1);
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: var(--radius-lg);
+    padding: 2px;
+    background: linear-gradient(270deg, var(--yellow), var(--blue), var(--rust), var(--yellow));
+    background-size: 600% 600%;
+    animation: borderGradientMove 4s linear infinite;
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+  @keyframes borderGradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
   .card:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(10,37,64,0.18); }
     .card img { width:100%; height: 180px; display:block; object-fit: cover; }
     .card .content { padding: 18px; display:flex; flex-direction:column; gap: 12px; }
@@ -127,19 +182,46 @@
     .content .btn { margin-top: 8px; }
 
     /* Coffee challenge band */
-    .coffee { background: linear-gradient(90deg, rgba(255,212,0,.18), rgba(31,122,224,.18)); border-top: 1px solid var(--neutral-200); border-bottom: 1px solid var(--neutral-200); }
-    .coffee .cta { display:flex; align-items:center; justify-content:space-between; gap: 20px; background: white; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); padding: 24px; }
-    .coffee .cta h3 { margin: 0; font-size: 26px; color: var(--neutral-900); }
+    .coffee {
+      background: linear-gradient(90deg, rgba(255,212,0,.18), rgba(31,122,224,.18));
+      border-top: 1px solid var(--neutral-200);
+      border-bottom: 1px solid var(--neutral-200);
+      min-height: 340px;
+      padding: 48px 0;
+      display: flex;
+      align-items: center;
+    }
+    .coffee .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+    }
+    .coffee .cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      background: white;
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      padding: 40px;
+      min-height: 220px;
+    }
+    .coffee .cta h3 {
+      margin: 0;
+      font-size: 28px;
+      color: var(--neutral-900);
+    }
 
     /* Newsletter */
-    .newsletter { background: var(--neutral-100); border-top: 1px solid var(--neutral-200); }
+    .newsletter { background: var(--neutral-100); border-top: 1px solid var(--neutral-200); padding-top: 48px; }
     form { display:flex; gap: 10px; flex-wrap: wrap; }
     input[type="email"] { flex: 1 1 320px; padding: 12px 14px; border: 1px solid var(--neutral-200); border-radius: 999px; font-size: 16px; }
 
     input:focus, .btn:focus, a:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
 
     /* Footer */
-    footer { background: #0E1A2B; color: #C9D1E1; padding: 40px 0; }
+    footer { background: #0E1A2B; color: #C9D1E1; padding: 16px 0 40px 0; }
     .footer-grid { display:grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 20px; }
     .footer-brand { display:flex; align-items:center; gap:12px; font-weight:800; color:white; }
     .legal { font-size: 13px; opacity: .8; margin-top: 10px; }
@@ -151,21 +233,84 @@
       .cards { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
     }
+     /* Donate widget — styles are namespaced with .cw- to avoid conflicts */
+  :root{
+    --cw-yellow:#f8c300; /* or reuse your --yellow if you like */
+    --cw-yellow-pressed:#e0b100;
+    --cw-gray-100:#f7f7f7; --cw-gray-200:#eeeeee; --cw-gray-300:#e4e4e4; --cw-gray-600:#7a7a7a;
+  }
+  .cw-donate-card {
+    width: min(540px, 96vw);
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0,0,0,.12);
+    padding: 22px 22px 26px;
+    border: 1px solid var(--cw-gray-300);
+    margin-inline: auto;
+    position: relative;
+}
+.cw-donate-card::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 0 8px 2px var(--navy);
+  opacity: 0.45;
+  animation: cwGlowPulse 2.8s ease-in-out infinite;
+}
+.cw-donate-card:hover::after,
+.cw-donate-card:focus-within::after {
+  animation-play-state: paused;
+}
+  @keyframes cwGlowPulse {
+  0% { opacity: 0.45; box-shadow: 0 0 8px 2px var(--navy); }
+  50% { opacity: 0.85; box-shadow: 0 0 14px 4px var(--navy); }
+  100% { opacity: 0.45; box-shadow: 0 0 8px 2px var(--navy); }
+  }
+  .cw-title{font-weight:800;font-size:1.6rem;margin:4px 6px 14px}
+  .cw-toggle{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:var(--cw-gray-100);padding:8px 0;border-radius:999px;border:1px solid var(--cw-gray-300);margin:0 0 16px;width:100%;max-width:100%;}
+  .cw-toggle button{border:0;padding:12px 14px;border-radius:999px;background:transparent;font-weight:700;cursor:pointer;transition:all .15s;outline-offset:4px}
+  .cw-toggle button.cw-active{background:var(--cw-yellow);color:#111;box-shadow:0 2px 0 0 #111 inset}
+  .cw-amount-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 4px}
+  .cw-amount{border:2px solid var(--cw-gray-300);background:var(--cw-gray-100);border-radius:14px;padding:16px 0 16px 0;font-weight:800;text-align:center;cursor:pointer;transition:border-color .15s,box-shadow .15s,background .15s;user-select:none;min-width:140px;}
+  .cw-amount:hover{background:#fff;border-color:var(--cw-yellow);box-shadow:0 0 0 3px rgba(248,195,0,.25)}
+  .cw-amount[aria-pressed="true"]{background:#fff;border-color:var(--cw-yellow);box-shadow:0 0 0 3px rgba(248,195,0,.35)}
+  .cw-custom-row{display:flex;align-items:center;gap:10px;margin:6px 0 16px;width:100%;}
+  .cw-currency{background:var(--cw-gray-200);border:2px solid var(--cw-gray-300);border-radius:14px;padding:14px 14px;font-weight:700}
+  .cw-custom{flex:0 1 400px;border:2px solid var(--cw-gray-300);border-radius:14px;padding:14px 22px;font-size:1rem;outline:none;transition:border-color .15s,box-shadow .15s;width:96%;min-width:0;}
+  .cw-custom:focus{border-color:var(--cw-yellow);box-shadow:0 0 0 3px rgba(248,195,0,.25)}
+  .cw-cta{width:100%;border:0;background:var(--cw-yellow);color:#111;padding:18px 22px;font-weight:900;font-size:1.05rem;border-radius:14px;cursor:pointer;margin-top:6px;transition:transform .02s,background .15s}
+  .cw-cta:hover{background:var(--cw-yellow-pressed)}
+  .cw-cta:active{transform:translateY(1px)}
+  .cw-cta:disabled{opacity:.5;cursor:not-allowed;transform:none}
+  .cw-footer-note{font-size:.9rem;color:var(--cw-gray-600);text-align:center;margin-top:10px;display:block;width:100%;}
+  .cw-notice{display:none;margin-top:14px;background:#fffbe6;border:1px solid #ffe58f;border-radius:12px;padding:12px 14px;font-size:.95rem}
+  dialog#cw-summary{border:0;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.12);width:min(520px,92vw);padding:20px}
+  dialog#cw-summary::backdrop{background:rgba(0,0,0,.25)}
+  .cw-modal-title{font-weight:800;font-size:1.2rem;margin:0 0 10px}
+  .cw-row{display:flex;justify-content:space-between;margin:6px 0}
+  .cw-modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px}
+  .cw-btn{border:2px solid var(--cw-gray-300);background:#fff;padding:10px 14px;border-radius:12px;cursor:pointer;font-weight:700}
+  .cw-btn.primary{background:var(--cw-yellow);border-color:var(--cw-yellow)}
+  @media (max-width:520px){.cw-amount-grid{grid-template-columns:repeat(2,1fr)}
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav" role="navigation" aria-label="Main">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true"></span>
-        <span>charity: water • Students</span>
+  <!-- Confetti canvas -->
+  <canvas id="confettiCanvas" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:3000;display:none;"></canvas>
+  <header style="background:rgba(255,255,255,0.96);border-bottom:1px solid var(--neutral-200);box-shadow:0 2px 8px rgba(10,37,64,0.04);position:sticky;top:0;z-index:50;">
+    <div class="container nav" role="navigation" aria-label="Main" style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;">
+      <div class="brand" style="display:flex;align-items:center;gap:14px;font-weight:800;font-size:1.18rem;color:var(--neutral-900);">
+        <span class="brand-mark" aria-hidden="true" style="width:32px;height:32px;background:var(--yellow);border-radius:8px;box-shadow:var(--shadow-sm);position:relative;display:inline-block;"></span>
+        <span style="letter-spacing:0.01em;">charity: water <span style="color:var(--blue);font-weight:600;">• Students</span></span>
       </div>
-      <nav class="nav-links">
-        <a href="#take-action">Take Action</a>
-        <a href="#impact">Impact</a>
-        <a href="#coffee">Coffee Challenge</a>
-        <a href="#newsletter" class="btn btn-outline">Get Updates</a>
-        <a href="#donate" class="btn btn-primary">Donate</a>
+      <nav class="nav-links" style="display:flex;gap:22px;align-items:center;">
+  <a href="#take-action" class="btn btn-primary see-ways-btn" style="padding:10px 18px;border-radius:999px;font-weight:700;background:var(--blue);color:white;border:2px solid transparent;transition:box-shadow .2s;">Take Action</a>
+  <a href="#newsletter" class="btn btn-primary get-updates-btn" style="padding:10px 18px;border-radius:999px;font-weight:700;background:var(--rust);color:white;border:2px solid transparent;transition:box-shadow .2s;">Get Updates</a>
+        <a href="#donate-widget" class="btn btn-primary" style="padding:10px 18px;border-radius:999px;font-weight:700;background:var(--yellow);color:var(--neutral-900);border:2px solid transparent;transition:box-shadow .2s;">Donate</a>
+  <!-- Donate button already uses brand yellow -->
       </nav>
     </div>
   </header>
@@ -179,13 +324,14 @@
           <h1 id="hero-title">You Don’t Have to Wait to Change the World.</h1>
           <p>Together, we can end the water crisis in our lifetime. Start with one step today and help bring clean water to families around the world.</p>
           <div class="cta-row">
-            <a id="donate" href="#" class="btn btn-primary" aria-label="Donate now">Donate</a>
-            <a href="#take-action" class="btn btn-outline" aria-label="See ways to get involved">See Ways to Help</a>
+            <a id="donate" href="#donate-widget" class="btn btn-primary" aria-label="Donate now">Donate</a>
+            <a href="#take-action" class="btn btn-outline see-ways-btn" aria-label="See ways to get involved" style="border-color:var(--blue);color:var(--blue);">See Ways to Help</a>
           </div>
           <div class="trust-row" aria-live="polite">
             <span class="trust-dot" aria-hidden="true"></span>
             <span>One hundred percent of public gifts fund clean water projects</span>
           </div>
+          
         </div>
         <div class="hero-media">
           <figure class="hero-card">
@@ -221,15 +367,7 @@
         <h2 id="action-title" class="section-title">Pick your first step</h2>
         <p class="section-sub">Choose one simple action and share it with a friend. Small choices build real change.</p>
         <div class="cards">
-          <article class="card">
-            <img src="assets/donate.jpg" alt="Hands passing a water container" />
-            <div class="content">
-              <span class="tag tag-blue">Donate</span>
-              <h4>Give today</h4>
-              <p>Your gift helps build and maintain water systems with trusted local partners.</p>
-              <a href="#" class="btn btn-primary" aria-label="Donate today">Donate</a>
-            </div>
-          </article>
+         
 
           <article class="card">
             <img src="assets/students.jpg" alt="Students working together at a campus table" />
@@ -237,17 +375,25 @@
               <span class="tag tag-orange">Lead</span>
               <h4>Start a campus chapter</h4>
               <p>Rally classmates, run events, and connect your school to projects in the field.</p>
-              <a href="#" class="btn btn-outline" aria-label="Start a campus chapter">Get the guide</a>
+              <a href="#campus-chapter-explainer" class="btn btn-outline" aria-label="Start a campus chapter" style="border-color:var(--navy);color:var(--navy);">Learn more</a>
             </div>
           </article>
-
+ <article class="card">
+            <img src="assets/donate.jpg" alt="Hands passing a water container" />
+            <div class="content">
+              <span class="tag tag-blue">Donate</span>
+              <h4>Give today</h4>
+              <p>Your gift helps build and maintain water systems with trusted local partners.</p>
+              <a href="#donate-widget" class="btn btn-primary" aria-label="Donate today">Donate</a>
+            </div>
+          </article>
           <article class="card">
             <img src="assets/coffee.jpg" alt="Cup of coffee on a table" />
             <div class="content">
               <span class="tag tag-rust">Challenge</span>
               <h4>Take the Coffee Challenge</h4>
               <p>Skip one cafe drink each week and give that amount to clean water.</p>
-              <a href="#coffee" class="btn btn-outline" aria-label="Learn about the Coffee Challenge">Learn more</a>
+              <a href="#coffee-explainer" class="btn btn-outline" aria-label="Learn about the Coffee Challenge" style="border-color:var(--rust);color:var(--rust);">Learn more</a>
             </div>
           </article>
         </div>
@@ -259,20 +405,22 @@
       <div class="container">
         <div class="cta">
           <div>
-            <h3 id="coffee-title">Your coffee can start a well</h3>
+            <h3 id="coffee-title">Your gift can change a life</h3>
             <p>Set a weekly gift equal to one cafe purchase. Invite three friends. Watch your impact grow.</p>
           </div>
           <div class="cta-row">
-            <a href="#" class="btn btn-primary" aria-label="Start the Coffee Challenge">Start now</a>
-            <a href="#" class="btn btn-outline" aria-label="Share the challenge">Share</a>
+            <a href="#donate-widget" class="btn btn-primary" aria-label="Donate" style="background:var(--yellow);color:var(--neutral-900);">Donate</a>
+            <a href="#" class="btn btn-outline" aria-label="Share the Challenge" id="shareChallengeBtn" style="border-color:var(--blue);color:var(--blue);">Share</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- GALLERY -->
-    <section aria-labelledby="gallery-title">
-      <div class="container">
+    
+    <!-- Real moments from the field -->
+
+
+  <div class="container" style="padding: 56px 32px;">
         <h2 id="gallery-title" class="section-title">Real moments from the field</h2>
         <p class="section-sub">Use photos that show strength, joy, and the solution in action.</p>
         <div class="cards" role="list">
@@ -290,10 +438,356 @@
           </figure>
         </div>
       </div>
-    </section>
 
+    <div class="explainer-row" style="display: flex; gap: 0; align-items: stretch; margin-bottom: 0;">
+      <!-- CAMPUS CHAPTER EXPLAINER -->
+      <section id="campus-chapter-explainer" class="campus-explainer" aria-labelledby="campus-explainer-title" style="flex:1;">
+        <div class="container">
+          <h2 id="campus-explainer-title" class="section-title">Start a Campus Chapter</h2>
+          <p class="section-sub">Rally classmates, run events, and connect your school to projects in the field. Build a movement for clean water on your campus and make a lasting impact together.</p>
+          <ul>
+            <li>Gather a team of passionate students</li>
+            <li>Host events and fundraisers for clean water</li>
+            <li>Connect with charity: water and local partners</li>
+            <li>Share your progress and inspire others</li>
+          </ul>
+          <a href="#" class="btn btn-primary" aria-label="Get the campus chapter guide" id="getGuideBtn">Get the Guide</a>
+          <span id="guidePopup" style="display:none;position:fixed;z-index:2000;background:#FFFACD;color:#222;padding:14px 22px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.12);font-weight:700;left:50%;top:18%;transform:translate(-50%,0);">Coming soon!</span>
+        </div>
+      </section>
+      <!-- DONATE WIDGET MOVED HERE -->
+  <div id="donate-widget"></div>
+      <form id="cwDonate" class="cw-donate-card" novalidate>
+       <h2 class="cw-title">Ready to Make an Impact?</h2>
+        <div class="cw-toggle" role="tablist" aria-label="Frequency">
+          <button type="button" class="cw-active" role="tab" aria-selected="true" data-frequency="once">Give Once</button>
+          <button type="button" role="tab" aria-selected="false" data-frequency="monthly">Monthly</button>
+        </div>
+        <div class="cw-amount-grid" aria-label="Select amount">
+          <div class="cw-amount" role="button" tabindex="0" aria-pressed="false" data-value="20">$20</div>
+          <div class="cw-amount" role="button" tabindex="0" aria-pressed="false" data-value="40">$40</div>
+          <div class="cw-amount" role="button" tabindex="0" aria-pressed="false" data-value="60">$60</div>
+          <div class="cw-amount" role="button" tabindex="0" aria-pressed="false" data-value="80">$80</div>
+          <div class="cw-amount" role="button" tabindex="0" aria-pressed="false" data-value="100">$100</div>
+          <div class="cw-amount" role="button" tabindex="0" aria-pressed="false" data-value="150">$150</div>
+        </div>
+        <div class="cw-custom-row">
+          <span class="cw-currency" aria-hidden="true">$</span>
+          <input class="cw-custom" id="cwCustomAmount" type="text" inputmode="decimal" placeholder="Other amount" aria-label="Custom amount" />
+        </div>
+        <button class="cw-cta" id="cwSubmitBtn" type="submit" disabled>Donate Now</button>
+        <p class="cw-footer-note">100% of donations go to clean water projects</p>
+        <div class="cw-notice" id="cwNotice"></div>
+      </form>
+      <!-- COFFEE CHALLENGE EXPLAINER -->
+      <section id="coffee-explainer" class="coffee-explainer" aria-labelledby="coffee-explainer-title" style="flex:1;">
+        <div class="container">
+          <h2 id="coffee-explainer-title" class="section-title">What is the Coffee Challenge?</h2>
+          <p class="section-sub">The Coffee Challenge is a simple way for students and supporters to make a real impact. By skipping one cafe drink each week and donating that amount, you help fund clean water projects for families in need. Invite friends to join and multiply your impact!</p>
+          <ul>
+            <li>Skip one coffee or cafe drink per week</li>
+            <li>Donate the amount you would have spent</li>
+            <li>Challenge three friends to join you</li>
+            <li>Track your impact and share your story</li>
+          </ul>
+          <a href="#" class="btn btn-primary" aria-label="Start the Coffee Challenge" id="startChallengeBtn">Start the Challenge</a>
+          <span id="challengePopup" style="display:none;position:fixed;z-index:2000;background:#FFFACD;color:#222;padding:14px 22px;border-radius:999px;box-shadow:0 4px 16px rgba(0,0,0,.12);font-weight:700;left:50%;top:18%;transform:translate(-50%,0);">Coming soon!</span>
+        </div>
+      </section>
+    </div>
+<!-- DONATE WIDGET -->
+<!-- Social Share Modal -->
+<dialog id="share-modal" style="border:0;border-radius:18px;box-shadow:0 6px 20px rgba(0,0,0,.12);width:min(420px,92vw);padding:20px;">
+  <p style="font-weight:800;font-size:1.2rem;margin:0 0 10px">Share the Coffee Challenge</p>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+  <button class="btn btn-outline" style="width:100%;border-color:var(--blue);color:var(--blue);" id="shareTwitter">Share on Twitter</button>
+  <button class="btn btn-outline" style="width:100%;border-color:var(--navy);color:var(--navy);" id="shareFacebook">Share on Facebook</button>
+  <button class="btn btn-outline" style="width:100%;border-color:var(--rust);color:var(--rust);" id="shareEmail">Share via Email</button>
+  <button class="btn btn-outline" style="width:100%;border-color:var(--yellow);color:var(--yellow);" id="shareCopy">Copy Link</button>
+  </div>
+  <div id="shareCopiedMsg" style="display:none;margin-top:12px;color:var(--blue);font-weight:600;text-align:center;">Link copied!</div>
+  <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:18px;">
+    <button class="btn" id="closeShareModal" type="button">Close</button>
+  </div>
+</dialog>
+
+<!-- The modal can sit anywhere near the end of <body> (kept unique ids) -->
+<dialog id="cw-summary">
+  <p class="cw-modal-title">charity:water donation</p>
+  <div class="cw-row"><span>Frequency</span><strong id="cwMFreq"></strong></div>
+  <div class="cw-row"><span>Amount</span><strong id="cwMAmt"></strong></div>
+  <p style="margin-top:10px">THANK YOU FOR YOUR DONATION!</p>
+  <div class="cw-modal-actions">
+    <button class="cw-btn" id="cwClose" type="button">Close</button>
+    <button class="cw-btn primary" id="cwProceed" type="button">Proceed</button>
+  </div>
+</dialog>
+
+
+<script>
+  (function(){
+    // Social Share Modal logic
+    const shareBtn = document.getElementById('shareChallengeBtn');
+    const shareModal = document.getElementById('share-modal');
+    const closeShareModal = document.getElementById('closeShareModal');
+    const shareTwitter = document.getElementById('shareTwitter');
+    const shareFacebook = document.getElementById('shareFacebook');
+    const shareEmail = document.getElementById('shareEmail');
+    const shareCopy = document.getElementById('shareCopy');
+    const shareCopiedMsg = document.getElementById('shareCopiedMsg');
+    const shareUrl = window.location.origin + window.location.pathname + '#coffee';
+    const shareText = encodeURIComponent('Join me in the Coffee Challenge to support clean water projects!');
+    if(shareBtn && shareModal){
+      shareBtn.addEventListener('click',function(e){ e.preventDefault(); shareModal.showModal(); });
+      closeShareModal.addEventListener('click',function(){ shareModal.close(); });
+      shareTwitter.addEventListener('click',function(){
+        window.open(`https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(shareUrl)}`,'_blank');
+      });
+      shareFacebook.addEventListener('click',function(){
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,'_blank');
+      });
+      shareEmail.addEventListener('click',function(){
+        window.location.href = `mailto:?subject=Join the Coffee Challenge!&body=Join me in the Coffee Challenge to support clean water projects: ${shareUrl}`;
+      });
+      shareCopy.addEventListener('click',function(){
+        navigator.clipboard.writeText(shareUrl).then(function(){
+          shareCopiedMsg.style.display = 'block';
+          setTimeout(()=>{ shareCopiedMsg.style.display = 'none'; }, 1800);
+        });
+      });
+    }
+    // Confetti burst animation
+      // Water drop burst animation
+      function waterDropBurst(x, y) {
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.display = 'block';
+        const drops = [];
+        for(let i=0;i<24;i++){
+          drops.push({
+            x:x,
+            y:y,
+            r:Math.random()*10+8,
+            color:'#1F7AE0',
+            angle:Math.random()*2*Math.PI,
+            speed:Math.random()*7+5,
+            gravity:0.3+Math.random()*0.2,
+            vx:0,vy:0
+          });
+        }
+        let frame=0;
+        function draw(){
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+          drops.forEach(d=>{
+            d.vx = Math.cos(d.angle)*d.speed;
+            d.vy = Math.sin(d.angle)*d.speed + d.gravity*frame;
+            d.x += d.vx;
+            d.y += d.vy;
+            ctx.save();
+            ctx.translate(d.x, d.y);
+            ctx.rotate(d.angle);
+            ctx.beginPath();
+            ctx.moveTo(0,0);
+            ctx.bezierCurveTo(-d.r/2,-d.r,d.r/2,-d.r,d.r,0);
+            ctx.bezierCurveTo(d.r/2,d.r,d.r/2,d.r,-d.r,0);
+            ctx.closePath();
+            ctx.fillStyle=d.color;
+            ctx.globalAlpha=0.85;
+            ctx.fill();
+            ctx.restore();
+          });
+          frame++;
+          if(frame<32){ requestAnimationFrame(draw); }
+          else { canvas.style.display='none'; }
+        }
+        draw();
+      }
+      // Emoji burst animation
+      function emojiBurst(x, y) {
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.display = 'block';
+        const emojis = ['🎉','💧','❤️'];
+        const burst = [];
+        for(let i=0;i<18;i++){
+          burst.push({
+            x:x,
+            y:y,
+            font:Math.random()*22+32,
+            emoji:emojis[Math.floor(Math.random()*emojis.length)],
+            angle:Math.random()*2*Math.PI,
+            speed:Math.random()*7+5,
+            gravity:0.25+Math.random()*0.15,
+            vx:0,vy:0
+          });
+        }
+        let frame=0;
+        function draw(){
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+          burst.forEach(b=>{
+            b.vx = Math.cos(b.angle)*b.speed;
+            b.vy = Math.sin(b.angle)*b.speed + b.gravity*frame;
+            b.x += b.vx;
+            b.y += b.vy;
+            ctx.font = `${b.font}px serif`;
+            ctx.globalAlpha = 0.95;
+            ctx.fillText(b.emoji, b.x, b.y);
+          });
+          frame++;
+          if(frame<32){ requestAnimationFrame(draw); }
+          else { canvas.style.display='none'; }
+        }
+        draw();
+      }
+    // Get the Guide popup logic
+    const getGuideBtn = document.getElementById('getGuideBtn');
+    const guidePopup = document.getElementById('guidePopup');
+    if(getGuideBtn && guidePopup){
+      getGuideBtn.addEventListener('click',function(e){
+        e.preventDefault();
+        guidePopup.style.display = 'inline-block';
+        // Center popup above button
+        const rect = getGuideBtn.getBoundingClientRect();
+        guidePopup.style.left = (rect.left + rect.width/2) + 'px';
+        guidePopup.style.top = (rect.top - 48) + 'px';
+        guidePopup.style.transform = 'translate(-50%,0)';
+    waterDropBurst(rect.left+rect.width/2, rect.top);
+        setTimeout(()=>{ guidePopup.style.display = 'none'; }, 1800);
+      });
+    }
+    // Start the Challenge popup logic
+    const startChallengeBtn = document.getElementById('startChallengeBtn');
+    const challengePopup = document.getElementById('challengePopup');
+    if(startChallengeBtn && challengePopup){
+      startChallengeBtn.addEventListener('click',function(e){
+        e.preventDefault();
+        challengePopup.style.display = 'inline-block';
+        // Center popup above button
+        const rect = startChallengeBtn.getBoundingClientRect();
+        challengePopup.style.left = (rect.left + rect.width/2) + 'px';
+        challengePopup.style.top = (rect.top - 48) + 'px';
+        challengePopup.style.transform = 'translate(-50%,0)';
+    emojiBurst(rect.left+rect.width/2, rect.top);
+        setTimeout(()=>{ challengePopup.style.display = 'none'; }, 1800);
+      });
+    }
+    const toggleButtons = document.querySelectorAll('.cw-toggle button');
+    const amountButtons = document.querySelectorAll('.cw-amount');
+    const customInput = document.getElementById('cwCustomAmount');
+    const submitBtn = document.getElementById('cwSubmitBtn');
+    const form = document.getElementById('cwDonate');
+    const notice = document.getElementById('cwNotice');
+    const dlg = document.getElementById('cw-summary');
+
+    if(!form) return; // exit if the block is not on the page
+
+    let state = { frequency: 'once', amount: null };
+
+    toggleButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        toggleButtons.forEach(b=>{b.classList.remove('cw-active'); b.setAttribute('aria-selected','false');});
+        btn.classList.add('cw-active');
+        btn.setAttribute('aria-selected','true');
+        state.frequency = btn.dataset.frequency;
+      });
+    });
+
+    function clearAmounts(){ amountButtons.forEach(b=>b.setAttribute('aria-pressed','false')); }
+    function setAmount(val){ state.amount = val; submitBtn.disabled = !(val > 0); }
+
+    amountButtons.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        clearAmounts();
+        btn.setAttribute('aria-pressed','true');
+        setAmount(Number(btn.dataset.value));
+        customInput.value = '';
+        notice.style.display = 'none';
+      });
+      btn.addEventListener('keydown', e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); btn.click(); }});
+    });
+
+    customInput.addEventListener('input', ()=>{
+      const clean = customInput.value.replace(/[^0-9.]/g,'');
+      if(clean !== customInput.value) customInput.value = clean;
+      clearAmounts();
+      const val = parseFloat(clean);
+      if(!isNaN(val) && val > 0){ setAmount(val); }
+      else { setAmount(null); }
+    });
+
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      if(!(state.amount > 0)){
+        notice.textContent = 'Please pick an amount.';
+        notice.style.display = 'block';
+        return;
+      }
+      // Confetti burst animation on Donate Now
+      (function confettiBurst() {
+        const canvas = document.getElementById('confettiCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        canvas.style.display = 'block';
+        const confetti = [];
+        for(let i=0;i<36;i++){
+          confetti.push({
+            x: window.innerWidth/2,
+            y: window.innerHeight/2,
+            r: Math.random()*7+6,
+            color: ['#FFC907','#003366','#77A8BB','#BF6C46','#FEDBC1'][Math.floor(Math.random()*5)],
+            angle: Math.random()*2*Math.PI,
+            speed: Math.random()*8+6,
+            gravity: 0.35+Math.random()*0.2,
+            vx:0,vy:0
+          });
+        }
+        let frame=0;
+        function draw(){
+          ctx.clearRect(0,0,canvas.width,canvas.height);
+          confetti.forEach(d=>{
+            d.vx = Math.cos(d.angle)*d.speed;
+            d.vy = Math.sin(d.angle)*d.speed + d.gravity*frame;
+            d.x += d.vx;
+            d.y += d.vy;
+            ctx.save();
+            ctx.translate(d.x, d.y);
+            ctx.rotate(d.angle);
+            ctx.beginPath();
+            ctx.arc(0,0,d.r,0,2*Math.PI);
+            ctx.fillStyle=d.color;
+            ctx.globalAlpha=0.88;
+            ctx.fill();
+            ctx.restore();
+          });
+          frame++;
+          if(frame<36){ requestAnimationFrame(draw); }
+          else { canvas.style.display='none'; }
+        }
+        draw();
+      })();
+
+      const payload = { frequency: state.frequency, amount: Number(state.amount.toFixed(2)) };
+      document.getElementById('cwMFreq').textContent = payload.frequency === 'monthly' ? 'Monthly' : 'One time';
+      document.getElementById('cwMAmt').textContent = `$${payload.amount.toLocaleString(undefined,{minimumFractionDigits:2})}`;
+      dlg.showModal();
+
+      document.getElementById('cwProceed').onclick = ()=>{
+        dlg.close();
+        // Replace with your Stripe or PayPal call
+        alert(`Ready to process: ${payload.frequency} donation of $${payload.amount}`);
+        console.log('Donation payload', payload);
+      };
+      document.getElementById('cwClose').onclick = ()=> dlg.close();
+    });
+  })();
+</script>
     <!-- NEWSLETTER -->
-    <section id="newsletter" class="newsletter" aria-labelledby="newsletter-title">
+  <section id="newsletter" class="newsletter" aria-labelledby="newsletter-title" style="margin:0;">
       <div class="container">
         <h2 id="newsletter-title" class="section-title">Get updates from the student team</h2>
         <p class="section-sub">Monthly notes on projects, events, and stories you can share.</p>
@@ -307,23 +801,48 @@
   </main>
 
   <footer>
+  
     <div class="container footer-grid">
       <div>
-        <div class="footer-brand"><span class="brand-mark" aria-hidden="true"></span> charity: water • Students</div>
-        <p class="legal">This is a student project site. Use licensed photos and the official logo set if you publish.</p>
-      </div>
-      <div>
-        <strong>Quick links</strong>
-        <ul>
-          <li><a href="#take-action">Take Action</a></li>
-          <li><a href="#coffee">Coffee Challenge</a></li>
-          <li><a href="#impact">Impact</a></li>
-        </ul>
+  <div class="footer-brand"><img src="img/logo.jpg" alt="charity: water logo" style="height:110px;vertical-align:middle;"></div>
+       
       </div>
       <div>
         <strong>Contact</strong>
         <p>Email the student team: <a href="mailto:students@example.edu">students@example.edu</a></p>
       </div>
+  <div id="waterFactBox" style="margin-top:0;">
+        <strong>💧 Random Water Fact</strong>
+        <p id="waterFact" style="font-size:1.08em;margin:10px 0;">Loading fact...</p>
+        <button id="newFactBtn" class="btn btn-outline" style="margin-top:6px;">Show another fact</button>
+      </div>
+<script>
+// Random Water Fact Generator
+const waterFacts = [
+  "Did you know? 771 million people lack access to clean water.",
+  "Every $40 can bring clean water to one person.",
+  "Women and girls spend 200 million hours every day collecting water.",
+  "Dirty water kills more people every year than all forms of violence, including war.",
+  "Access to clean water can improve education, health, and income—especially for women and children.",
+  "charity: water has funded over 111,000 water projects worldwide.",
+  "Clean water reduces waterborne diseases and saves lives.",
+  "100% of public donations to charity: water fund clean water projects.",
+  "In rural Africa, women walk an average of 6 kilometers each day to collect water.",
+  "Since 2006, charity: water has helped over 15 million people get access to clean water."
+];
+function showRandomFact() {
+  const factEl = document.getElementById('waterFact');
+  if (!factEl) return;
+  const idx = Math.floor(Math.random() * waterFacts.length);
+  factEl.textContent = waterFacts[idx];
+}
+document.addEventListener('DOMContentLoaded', () => {
+  showRandomFact();
+  const btn = document.getElementById('newFactBtn');
+  if (btn) btn.addEventListener('click', showRandomFact);
+});
+</script>
+
     </div>
   </footer>
 
